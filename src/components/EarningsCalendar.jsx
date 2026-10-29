@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { CalendarToolbar } from "./CalendarToolbar";
 import { CalendarGrid } from "./CalendarGrid";
-import "./calendars.css"
+import { SelectedDateEarnings } from "./SelectedDateEarnings";
+import { mockEarnings } from "../data/mockEarnings";
+import "./EarningsCalendar.css"
 import { getMonthDates, getWeekDates, navigateMonth, navigateWeek } from "../utils/dateCalculations";
 
 export function EarningsCalendar() {
@@ -52,6 +54,8 @@ export function EarningsCalendar() {
         view={view}
         onDateSelect={handleDateSelect}
       />
+
+      <SelectedDateEarnings selectedDate={selectedDate} earnings={mockEarnings}/>
     </section>
   );
 }

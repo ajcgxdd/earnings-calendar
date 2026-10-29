@@ -1,4 +1,5 @@
 import { CalendarDay } from "./calendarDay";
+import './CalendarGrid.css'
 
 export function CalendarGrid({ dates, currentDate, selectedDate, view, onDateSelect }) {
   const weekdays = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];

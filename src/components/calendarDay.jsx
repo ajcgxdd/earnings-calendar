@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 import { isSameDay, isSameMonth } from "../utils/dateCalculations";
-import { mockEarnings } from "../utils/mockEarnings";
-import "./calendars.css";
+import { mockEarnings } from "../data/mockEarnings";
+import "./CalendarDay.css";
 
 export function CalendarDay({ date, currentDate, selectedDate, view, onDateSelect }){
     const isToday = isSameDay(date, new Date());

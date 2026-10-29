@@ -1,14 +1,8 @@
 import { format } from "date-fns";
+import "./CalendarToolbar.css"
 
-export function CalendarToolbar({
-  currentDate,
-  view,
-  onNavigate,
-  onToday,
-  onViewChange,
-}) {
-  const title =
-    view === "month" ? format(currentDate, "MMMM yyyy") : "Selected week";
+export function CalendarToolbar({ currentDate, view, onNavigate, onToday, onViewChange }){
+  const title = view === "month" ? format(currentDate, "MMMM yyyy") : "Selected week";
 
   return (
     <div className="calendar-toolbar">
@@ -64,6 +58,7 @@ export function CalendarToolbar({
           >
             Week
           </button>
+
         </div>
       </div>
     </div>

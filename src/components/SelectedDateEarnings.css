@@ -1,0 +1,165 @@
+/* Earnings listed for the selected date */
+.selected-date-earnings {
+  margin-top: 24px;
+  padding: 20px;
+  border: 1px solid #27313d;
+  border-radius: 12px;
+  background: #121821;
+}
+
+.selected-date-earnings__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.selected-date-earnings__label {
+  margin: 0 0 6px;
+  color: #8995a5;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.selected-date-earnings__header h2 {
+  margin: 0;
+  color: #f1f5f9;
+  font-size: 1.2rem;
+}
+
+.selected-date-earnings__count {
+  padding: 6px 10px;
+  border-radius: 20px;
+  background: #1d4ed8;
+  color: #fff;
+  font-size: 0.8rem;
+}
+
+.selected-date-earnings__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.selected-date-earnings__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 16px 0;
+  border-top: 1px solid #27313d;
+}
+
+.selected-date-earnings__company h3 {
+  margin: 0 0 4px;
+  color: #f1f5f9;
+  font-size: 0.95rem;
+}
+
+.selected-date-earnings__company p {
+  margin: 0;
+  color: #8995a5;
+  font-size: 0.8rem;
+}
+
+.selected-date-earnings__details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  color: #8995a5;
+  font-size: 0.8rem;
+}
+
+.selected-date-earnings__empty {
+  padding: 24px 0;
+  border-top: 1px solid #27313d;
+  color: #8995a5;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .selected-date-earnings {
+    padding: 16px;
+  }
+
+  .selected-date-earnings__item {
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .selected-date-earnings__details {
+    text-align: right;
+  }
+}
+
+.selected-date-earnings__search {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+
+.selected-date-earnings__search input {
+    flex: 1;
+    min-width: 0;
+    padding: 0.65rem 0.8rem;
+    background-color: #161b22;
+    color: #e6edf3;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.selected-date-earnings__search input:focus {
+    border-color: #58a6ff;
+}
+
+.selected-date-earnings__search input::placeholder {
+    color: #8b949e;
+}
+
+.selected-date-earnings__search button {
+    padding: 0.6rem 0.75rem;
+    background: transparent;
+    color: #8b949e;
+    border: 1px solid #30363d;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.selected-date-earnings__search button:hover {
+    color: #e6edf3;
+    border-color: #8b949e;
+}
+
+.earnings-result {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.55rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.earnings-result--beat {
+    color: #3fb950;
+    background-color: rgba(63, 185, 80, 0.12);
+}
+
+.earnings-result--miss {
+    color: #f85149;
+    background-color: rgba(248, 81, 73, 0.12);
+}
+
+.earnings-result--meet {
+    color: #d29922;
+    background-color: rgba(210, 153, 34, 0.12);
+}
+
+.earnings-result--pending {
+    color: #8b949e;
+    background-color: rgba(139, 148, 158, 0.12);
+}

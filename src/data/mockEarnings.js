@@ -33,7 +33,7 @@ export const mockEarnings = [
     date: "2026-10-29",
     time: "Before Market",
     epsEstimate: 22.8,
-    epsActual: 23.6,
+    epsActual: 23.5,
   },
   {
     id: 5,
