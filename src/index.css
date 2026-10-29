@@ -1,0 +1,310 @@
+
+/* =========================================
+   Global styles
+========================================= */
+
+:root {
+    font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+
+    color: #e6edf3;
+    background: #0b0f14;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+
+    --bg-main: #0b0f14;
+    --bg-panel: #121821;
+    --bg-hover: #1a2330;
+
+    --border: #27313d;
+
+    --text-primary: #e6edf3;
+    --text-muted: #8995a5;
+
+    --accent: #5b8cff;
+    --accent-hover: #78a0ff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-width: 320px;
+    min-height: 100%;
+}
+
+body {
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* =========================================
+   Application layout
+========================================= */
+
+.app-layout {
+    min-height: 100vh;
+    background: var(--bg-main);
+}
+
+.main-content {
+    width: 100%;
+    min-height: calc(100vh - 76px);
+}
+
+.page-content {
+    width: 100%;
+    max-width: 1440px;
+
+    padding: 36px 32px;
+    margin: 0 auto;
+}
+
+
+/* =========================================
+   Page heading
+========================================= */
+
+.page-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    margin-bottom: 28px;
+}
+
+.page-heading h1 {
+    margin: 0 0 8px;
+
+    color: var(--text-primary);
+
+    font-size: 26px;
+    font-weight: 650;
+    letter-spacing: -0.6px;
+}
+
+.page-heading p:not(.eyebrow) {
+    margin: 0;
+
+    color: var(--text-muted);
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.eyebrow {
+    margin: 0 0 10px;
+
+    color: var(--text-muted);
+
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
+
+
+/* =========================================
+   Header / top navigation
+========================================= */
+
+.topbar {
+    min-height: 76px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 32px;
+    padding: 16px 32px;
+
+    border-bottom: 1px solid var(--border);
+
+    background: var(--bg-main);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+    flex-shrink: 0;
+
+    color: var(--text-primary);
+
+    font-size: 15px;
+    font-weight: 650;
+}
+
+.brand-icon {
+    display: grid;
+    place-items: center;
+
+    width: 34px;
+    height: 34px;
+
+    border-radius: 9px;
+
+    background: #243657;
+    color: #9cb9ff;
+
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.top-nav {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+    margin-right: auto;
+}
+
+.nav-link {
+    padding: 10px 12px;
+
+    border-radius: 7px;
+
+    color: var(--text-muted);
+
+    font-size: 13px;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background: var(--bg-hover);
+    color: var(--text-primary);
+}
+
+.search-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 24px;
+    min-width: 220px;
+
+    padding: 10px 12px;
+
+    color: var(--text-muted);
+    background: var(--bg-panel);
+
+    border: 1px solid var(--border);
+    border-radius: 7px;
+
+    font-size: 12px;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.search-button:hover {
+    background: var(--bg-hover);
+    border-color: #3b4a60;
+}
+
+.search-button span:last-child {
+    font-size: 18px;
+}
+
+
+/* =========================================
+   Placeholder elements
+========================================= */
+
+.placeholder-icon {
+    display: grid;
+    place-items: center;
+
+    width: 52px;
+    height: 52px;
+
+    margin-bottom: 14px;
+
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    color: var(--accent);
+
+    font-size: 25px;
+}
+
+
+/* =========================================
+   Responsive layout
+========================================= */
+
+@media (max-width: 760px) {
+    .topbar {
+        flex-wrap: wrap;
+
+        gap: 12px;
+        padding: 14px 18px;
+    }
+
+    .top-nav {
+        order: 3;
+
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .search-button {
+        order: 4;
+
+        width: 100%;
+        min-width: 0;
+    }
+
+    .page-content {
+        padding: 26px 18px;
+    }
+
+    .page-heading h1 {
+        font-size: 23px;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-content {
+        padding: 22px 12px;
+    }
+
+    .topbar {
+        padding: 14px 12px;
+    }
+
+    .brand {
+        font-size: 14px;
+    }
+}

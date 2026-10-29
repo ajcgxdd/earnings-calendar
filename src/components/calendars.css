@@ -1,0 +1,490 @@
+
+/* =========================================
+   Earnings Calendar
+========================================= */
+
+.earnings-calendar {
+    width: 100%;
+    margin-top: 24px;
+
+    color: #e2e8f0;
+
+    font-family: Inter, system-ui, -apple-system, sans-serif;
+}
+
+
+/* =========================================
+   Calendar Toolbar
+========================================= */
+
+.calendar-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 24px;
+
+    padding: 22px 24px;
+    margin-bottom: 20px;
+
+    background: #121821;
+
+    border: 1px solid #27313d;
+    border-radius: 10px;
+}
+
+.calendar-toolbar__heading {
+    display: flex;
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+.calendar-toolbar__title {
+    margin: 0;
+
+    color: #f1f5f9;
+
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+}
+
+.calendar-toolbar__subtitle {
+    margin: 0;
+
+    color: #8995a5;
+
+    font-size: 12px;
+}
+
+
+/* =========================================
+   Toolbar Controls
+========================================= */
+
+.calendar-toolbar__controls {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+}
+
+.calendar-toolbar button {
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 500;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+/* Today button */
+
+.calendar-toolbar__today {
+    padding: 9px 14px;
+
+    color: #cbd5e1;
+    background: #111827;
+
+    border: 1px solid #263449;
+    border-radius: 7px;
+}
+
+.calendar-toolbar__today:hover {
+    background: #1e293b;
+    border-color: #475569;
+}
+
+
+/* Previous / Next navigation */
+
+.calendar-toolbar__navigation {
+    display: flex;
+    align-items: center;
+
+    gap: 6px;
+}
+
+.calendar-toolbar__nav-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    color: #94a3b8;
+    background: #111827;
+
+    border: 1px solid #263449;
+    border-radius: 7px;
+
+    font-size: 18px;
+}
+
+.calendar-toolbar__nav-button:hover {
+    color: #f1f5f9;
+    background: #1e293b;
+    border-color: #475569;
+}
+
+
+/* =========================================
+   Month / Week Toggle
+========================================= */
+
+.calendar-toolbar__view-toggle {
+    display: flex;
+    align-items: center;
+
+    gap: 3px;
+    padding: 4px;
+
+    background: #0b1120;
+
+    border: 1px solid #263449;
+    border-radius: 8px;
+}
+
+.calendar-toolbar__view-button {
+    padding: 7px 13px;
+
+    color: #64748b;
+    background: transparent;
+
+    border: none;
+    border-radius: 5px;
+}
+
+.calendar-toolbar__view-button:hover {
+    color: #cbd5e1;
+}
+
+.calendar-toolbar__view-button.active {
+    color: #eff6ff;
+    background: #1d4ed8;
+
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================
+   Calendar Grid Container
+========================================= */
+
+.calendar-grid {
+    width: 100%;
+
+    overflow: hidden;
+
+    background: #0b1120;
+
+    border: 1px solid #1e293b;
+    border-radius: 10px;
+}
+
+
+/* =========================================
+   Weekday Headings
+========================================= */
+
+.calendar-grid__weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+
+    background: #0f172a;
+
+    border-bottom: 1px solid #1e293b;
+}
+
+.calendar-grid__weekday {
+    padding: 13px 10px;
+
+    color: #64748b;
+
+    font-size: 11px;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+}
+
+
+/* =========================================
+   Calendar Date Layout
+========================================= */
+
+.calendar-grid__dates {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+
+/* =========================================
+   Individual Calendar Day
+========================================= */
+
+.calendar-day {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    min-width: 0;
+    min-height: 110px;
+
+    padding: 12px;
+
+    color: #cbd5e1;
+    background: #0b1120;
+
+    border: none;
+    border-right: 1px solid #1e293b;
+    border-bottom: 1px solid #1e293b;
+
+    font-family: inherit;
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+
+/* Remove the right border from the final column */
+
+.calendar-day:nth-child(7n) {
+    border-right: none;
+}
+
+
+/* Hover */
+
+.calendar-day:hover {
+    background: #111c30;
+}
+
+
+/* Date number */
+
+.calendar-day__number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 28px;
+    height: 28px;
+
+    color: #cbd5e1;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    border-radius: 50%;
+}
+
+
+/* =========================================
+   Today's Date
+========================================= */
+
+.calendar-day--today .calendar-day__number {
+    color: #60a5fa;
+
+    border: 1px solid #3b82f6;
+}
+
+
+/* =========================================
+   Selected Date
+========================================= */
+
+.calendar-day--selected {
+    background: rgba(37, 99, 235, 0.12);
+
+    box-shadow: inset 0 0 0 1px #2563eb;
+}
+
+.calendar-day--selected:hover {
+    background: rgba(37, 99, 235, 0.2);
+}
+
+.calendar-day--selected .calendar-day__number {
+    color: #ffffff;
+    background: #2563eb;
+
+    border: none;
+}
+
+
+/* =========================================
+   Dates Outside the Current Month
+========================================= */
+
+.calendar-day--outside-month {
+    background: #080d18;
+}
+
+.calendar-day--outside-month .calendar-day__number {
+    color: #334155;
+}
+
+.calendar-day--outside-month:hover {
+    background: #0f172a;
+}
+
+
+/* =========================================
+   Week View
+========================================= */
+
+.calendar-grid--week .calendar-day {
+    min-height: 170px;
+}
+
+
+/* =========================================
+   Focus States
+========================================= */
+
+.calendar-toolbar button:focus-visible,
+.calendar-day:focus-visible {
+    outline: 2px solid #60a5fa;
+    outline-offset: -2px;
+}
+
+
+/* =========================================
+   Responsive Layout
+========================================= */
+
+@media (max-width: 900px) {
+    .calendar-toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+
+        gap: 18px;
+    }
+
+    .calendar-toolbar__controls {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .calendar-day {
+        min-height: 90px;
+        padding: 8px;
+    }
+
+    .calendar-grid--week .calendar-day {
+        min-height: 180px;
+    }
+}
+
+
+@media (max-width: 600px) {
+    .calendar-toolbar {
+        padding: 18px;
+    }
+
+    .calendar-toolbar__title {
+        font-size: 20px;
+    }
+
+    .calendar-toolbar__controls {
+        gap: 8px;
+    }
+
+    .calendar-toolbar__today {
+        padding: 8px 10px;
+    }
+
+    .calendar-toolbar__view-button {
+        padding: 7px 9px;
+    }
+
+    .calendar-grid__weekday {
+        padding: 10px 2px;
+
+        font-size: 10px;
+        letter-spacing: 0;
+    }
+
+    .calendar-day {
+        min-height: 65px;
+        padding: 5px;
+    }
+
+    .calendar-day__number {
+        width: 25px;
+        height: 25px;
+
+        font-size: 12px;
+    }
+
+    .calendar-grid--week .calendar-day {
+        min-height: 140px;
+    }
+}
+
+.calendar-day {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  min-width: 0;
+  min-height: 110px;
+  padding: 10px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background: var(--panel-color);
+  color: var(--text-color);
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.calendar-day:hover {
+  border-color: var(--accent-color);
+}
+
+.calendar-day--today {
+  border-color: var(--accent-color);
+}
+
+.calendar-day--selected {
+  background: var(--selected-day-color);
+}
+
+.calendar-day--outside-month {
+  opacity: 0.4;
+}
+
+.calendar-day__number {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.calendar-day__earnings {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.calendar-day__earning {
+  overflow: hidden;
+  padding: 3px 5px;
+  border-radius: 4px;
+  background: var(--accent-color);
+  color: white;
+  font-size: 0.7rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
