@@ -3,8 +3,13 @@ import { CalendarToolbar } from "./CalendarToolbar";
 import { CalendarGrid } from "./CalendarGrid";
 import { SelectedDateEarnings } from "./SelectedDateEarnings";
 import { mockEarnings } from "../data/mockEarnings";
-import "./EarningsCalendar.css"
-import { getMonthDates, getWeekDates, navigateMonth, navigateWeek } from "../utils/dateCalculations";
+import "./EarningsCalendar.css";
+import {
+  getMonthDates,
+  getWeekDates,
+  navigateMonth,
+  navigateWeek,
+} from "../utils/dateCalculations";
 
 export function EarningsCalendar() {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -39,6 +44,15 @@ export function EarningsCalendar() {
 
   return (
     <section className="earnings-calendar">
+      <div className="page-heading">
+        <div>
+          <p className="eyebrow">MARKET INTELLIGENCE / NSE</p>
+
+          <h1>Earnings Calendar</h1>
+
+          <p>Track upcoming results across Indian equities.</p>
+        </div>
+      </div>
       <CalendarToolbar
         currentDate={currentDate}
         view={view}
@@ -55,7 +69,10 @@ export function EarningsCalendar() {
         onDateSelect={handleDateSelect}
       />
 
-      <SelectedDateEarnings selectedDate={selectedDate} earnings={mockEarnings}/>
+      <SelectedDateEarnings
+        selectedDate={selectedDate}
+        earnings={mockEarnings}
+      />
     </section>
   );
 }

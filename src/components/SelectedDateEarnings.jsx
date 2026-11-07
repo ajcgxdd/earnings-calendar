@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { format } from "date-fns";
+import { Link } from "react-router-dom";
 import { getEarningsResult } from "../utils/earningsCalculation";
 import "./SelectedDateEarnings.css";
 
@@ -69,10 +70,15 @@ export function SelectedDateEarnings({ selectedDate, earnings }) {
           {filteredEarnings.map((earning) => {
             const result = getEarningsResult(earning);
             return(
-            <div key={earning.id} className="selected-date-earnings__item">
+            <div
+              key={earning.id}
+              className="selected-date-earnings__item"
+            >
               <div className="selected-date-earnings__company">
-                <h3>{earning.symbol}</h3>
-                <p>{earning.companyName}</p>
+                <Link to={`/company/${earning.symbol}`}>
+                  <h3>{earning.symbol}</h3>
+                  <p>{earning.companyName}</p>
+                </Link>
               </div>
 
               <div className="selected-date-earnings__details">

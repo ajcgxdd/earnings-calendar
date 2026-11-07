@@ -1,5 +1,7 @@
 import {Header} from "./components/header"
 import { EarningsCalendar } from "./components/EarningsCalendar";
+import { CompanyInfo } from "./components/companyInfo";
+import { Route, Routes } from "react-router-dom";
 
 export function App(){
   return(
@@ -8,21 +10,11 @@ export function App(){
 
       <main className="main-content">
         <section className="page-content">
-          <div className="page-heading">
-            <div>
-              <p className="eyebrow">
-                MARKET INTELLIGENCE / NSE
-              </p>
 
-              <h1>Earnings Calendar</h1>
-
-              <p>
-                Track upcoming results across Indian equities.
-              </p>
-            </div>
-          </div>
-
-          <EarningsCalendar/>
+          <Routes>
+            <Route path="/" element={<EarningsCalendar />} />
+            <Route path="/company/:symbol" element={<CompanyInfo />} />
+          </Routes>
         </section>
       </main>
     </div>

@@ -1,0 +1,265 @@
+
+/* =================================
+   COMPANY PAGE
+================================= */
+
+.company-financials {
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 24px 32px 40px;
+    color: #e6edf3;
+}
+
+/* Back navigation */
+
+.company-back-link {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 22px;
+    color: #8b949e;
+    font-size: 13px;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.company-back-link:hover {
+    color: #58a6ff;
+}
+
+/* =================================
+   MAIN LAYOUT
+================================= */
+
+.company-info-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(280px, 0.95fr);
+    gap: 20px;
+    align-items: stretch;
+}
+
+.company-main {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+}
+
+/* Shared card styling */
+
+.company-overview,
+.company-stock-details,
+.company-profile {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 9px;
+}
+
+/* =================================
+   COMPANY OVERVIEW
+================================= */
+
+.company-overview {
+    padding: 22px 24px;
+}
+
+.company-section-label {
+    margin: 0 0 20px;
+    color: #8b949e;
+    font-size: 11px;
+    font-weight: 650;
+    letter-spacing: 1.1px;
+}
+
+.company-identity {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.company-identity h1 {
+    margin: 0 0 7px;
+    color: #f0f6fc;
+    font-size: 25px;
+    font-weight: 650;
+    letter-spacing: -0.6px;
+}
+
+.company-meta {
+    margin: 0 0 12px;
+    color: #8b949e;
+    font-size: 13px;
+}
+
+.company-identity a {
+    color: #58a6ff;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.company-identity a:hover {
+    text-decoration: underline;
+}
+
+.company-symbol {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 62px;
+    height: 62px;
+    flex-shrink: 0;
+    border: 1px solid #30363d;
+    border-radius: 10px;
+    background: #1c2633;
+    color: #58a6ff;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* =================================
+   STOCK METRICS
+================================= */
+
+.company-stock-details {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+    padding: 8px 24px;
+}
+
+.stock-metric {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 9px;
+    min-height: 88px;
+    padding: 14px 12px;
+}
+
+.stock-metric:nth-child(odd) {
+    border-right: 1px solid #30363d;
+}
+
+.stock-metric:nth-child(n + 3) {
+    border-top: 1px solid #30363d;
+}
+
+.stock-metric span {
+    color: #8b949e;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.stock-metric strong {
+    color: #e6edf3;
+    font-size: 19px;
+    font-weight: 650;
+    letter-spacing: -0.3px;
+}
+
+/* Highlight the current price */
+
+.stock-metric:first-child strong {
+    color: #3fb950;
+}
+
+/* =================================
+   COMPANY PROFILE
+================================= */
+
+.company-profile {
+    display: flex;
+    flex-direction: column;
+    padding: 16px 24px;
+    min-width: 0;
+}
+
+.company-profile .company-section-label {
+    margin-bottom: 12px;
+}
+
+.company-profile-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-detail {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 13px 0;
+    border-bottom: 1px solid #252d36;
+}
+
+.profile-detail span {
+    color: #8b949e;
+    font-size: 11px;
+}
+
+.profile-detail strong {
+    color: #e6edf3;
+    font-size: 13px;
+    font-weight: 550;
+}
+
+.company-description {
+    margin: auto 0 0;
+    padding-top: 18px;
+    color: #8b949e;
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+/* =================================
+   RESPONSIVE
+================================= */
+
+@media (max-width: 850px) {
+    .company-info-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .company-profile {
+        min-height: auto;
+    }
+
+    .company-description {
+        margin-top: 18px;
+    }
+}
+
+@media (max-width: 550px) {
+    .company-financials {
+        padding: 18px 14px 30px;
+    }
+
+    .company-overview,
+    .company-profile {
+        padding: 18px;
+    }
+
+    .company-stock-details {
+        padding: 6px 12px;
+    }
+
+    .company-identity h1 {
+        font-size: 20px;
+    }
+
+    .company-symbol {
+        width: 48px;
+        height: 48px;
+        font-size: 11px;
+    }
+
+    .stock-metric {
+        min-height: 78px;
+        padding: 12px 9px;
+    }
+
+    .stock-metric strong {
+        font-size: 16px;
+    }
+}
