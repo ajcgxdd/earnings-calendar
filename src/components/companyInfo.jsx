@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { mockCompanyInfo } from "../utils/mockCompanyinfo";
 import "./companyInfo.css";
+import { formattedDate } from "../utils/dateCalculations";
 
 export function CompanyInfo() {
   function convertIntoCr(marketCap) {
@@ -95,6 +96,43 @@ export function CompanyInfo() {
             {mockCompanyInfo.profile.description}
           </p>
         </aside>
+
+        <section className="company-latest-earnings">
+          <div className="latest-earnings-header">
+            <div>
+              <p className="company-section-label">UPCOMING EARNINGS</p>
+              <h2>{mockCompanyInfo.upcomingEarnings.quarter}</h2>
+            </div>
+
+            <span className="earnings-status">Upcoming</span>
+          </div>
+
+          <div className="latest-earnings-details">
+            <div className="earnings-date">
+              <span>Reporting Date</span>
+              <strong>
+                {formattedDate(mockCompanyInfo.upcomingEarnings.reportingDate)}
+              </strong>
+              <small>{mockCompanyInfo.upcomingEarnings.reportingTime}</small>
+            </div>
+
+            <div className="earnings-metric">
+              <span>EPS Estimate</span>
+              <strong>₹{mockCompanyInfo.upcomingEarnings.epsEstimate}</strong>
+            </div>
+
+            <div className="earnings-metric">
+              <span>Revenue Estimate</span>
+              <strong>
+                ₹
+                {mockCompanyInfo.upcomingEarnings.revenueEstimate.toLocaleString(
+                  "en-IN",
+                )}{" "}
+                Cr.
+              </strong>
+            </div>
+          </div>
+        </section>
       </div>
     </main>
   );

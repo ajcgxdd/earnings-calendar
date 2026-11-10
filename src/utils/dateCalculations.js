@@ -1,4 +1,4 @@
-import { startOfWeek, addWeeks, addMonths, eachDayOfInterval, startOfMonth, endOfMonth, isSameDay as dateFnsIsSameDay, isSameMonth as dateFnsIsSameMonth } from "date-fns";
+import { parseISO, startOfWeek, addWeeks, addMonths, eachDayOfInterval, startOfMonth, endOfMonth, isSameDay as dateFnsIsSameDay, isSameMonth as dateFnsIsSameMonth, format } from "date-fns";
 
 export function getStartOfWeek(date){
     return startOfWeek(date, {weekStartsOn: 1, });
@@ -38,4 +38,11 @@ export function isSameDay(date1, date2){
 
 export function isSameMonth(date1, date2){
     return dateFnsIsSameMonth(date1, date2);
+}
+
+export function formattedDate(date){
+    const fdate = parseISO(date)
+    const formattedDate = format(fdate, 'do MMM yyyy');
+    
+    return formattedDate;
 }
