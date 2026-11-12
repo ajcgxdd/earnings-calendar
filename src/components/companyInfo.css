@@ -270,6 +270,7 @@
 ================================= */
 
 .company-latest-earnings {
+    grid-column: 1 / -1;
     position: relative;
     margin-top: 22px;
     padding: 22px 26px;
@@ -400,4 +401,118 @@
     .latest-earnings-header h2 {
         font-size: 17px;
     }
+}
+
+
+/* =================================
+   HISTORICAL EARNINGS
+================================= */
+
+.historical-earnings {
+    grid-column: 1 / -1;
+    width: 100%;
+    margin-top: 22px;
+    padding: 24px;
+    box-sizing: border-box;
+
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 9px;
+}
+
+.historical-earnings > strong {
+    display: block;
+    margin-bottom: 20px;
+
+    color: #e6edf3;
+    font-size: 15px;
+    font-weight: 650;
+}
+
+/* Table wrapper */
+.historical-earnings {
+    overflow-x: auto;
+}
+
+/* Table */
+.historical-earnings table {
+    width: 100%;
+    min-width: 850px;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+/* Header */
+.historical-earnings thead {
+    background: #1c232d;
+}
+
+.historical-earnings th {
+    padding: 13px 14px;
+
+    color: #8b949e;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+    letter-spacing: 0.3px;
+
+    border-bottom: 1px solid #30363d;
+}
+
+/* Table rows */
+.historical-earnings td {
+    padding: 14px;
+
+    color: #c9d1d9;
+    font-size: 12px;
+    white-space: nowrap;
+
+    border-bottom: 1px solid #252d36;
+}
+
+.historical-earnings tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.historical-earnings tbody tr:hover {
+    background: #1c232d;
+}
+
+/* Quarter column */
+.historical-earnings td:first-child {
+    color: #e6edf3;
+    font-weight: 600;
+}
+
+/* Result indicators */
+.historical-earnings td:nth-child(5),
+.historical-earnings td:nth-child(8) {
+    font-size: 11px;
+    font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .historical-earnings {
+        padding: 16px;
+    }
+
+    .historical-earnings > strong {
+        font-size: 14px;
+    }
+}
+
+.historical-earnings .result-beat {
+    color: #3fb950;
+    font-weight: 600;
+}
+
+.historical-earnings .result-miss {
+    color: #f85149;
+    font-weight: 600;
+}
+
+.historical-earnings .result-met {
+    color: #d29922;
+    font-weight: 600;
 }

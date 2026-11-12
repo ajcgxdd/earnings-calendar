@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { mockCompanyInfo } from "../utils/mockCompanyinfo";
 import "./companyInfo.css";
 import { formattedDate } from "../utils/dateCalculations";
+import { format } from "date-fns";
 
 export function CompanyInfo() {
   function convertIntoCr(marketCap) {
@@ -131,7 +132,67 @@ export function CompanyInfo() {
                 Cr.
               </strong>
             </div>
+
           </div>
+        </section>
+        <section className="historical-earnings">
+          <strong>Historical Financial Performance</strong>
+          <table>
+            <thead>
+              <tr>
+                <th>Quarter</th>
+                <th>Report Date</th>
+                <th>EPS Reported</th>
+                <th>EPS Estimate</th>
+                <th>EPS Change</th>
+                <th>Revenue Reported</th>
+                <th>Revenue Estimate</th>
+                <th>Revenue Change</th>
+              </tr>
+            </thead>
+            <tbody>
+              {mockCompanyInfo.earningsHistory.map((item) => (
+                <tr key={item.quarter}>
+                  <td>{item.quarter}</td>
+                  <td>{format(new Date(item.date), "dd-MM-yyyy")}</td>
+                  <td>{item.epsActual}</td>
+                  <td>{item.epsEstimate}</td>
+                  <td
+                    className={
+                      item.epsActual > item.epsEstimate
+                        ? "result-beat"
+                        : item.epsActual < item.epsEstimate
+                          ? "result-miss"
+                          : "result-met"
+                    }
+                  >
+                    {item.epsActual > item.epsEstimate
+                      ? "Beat"
+                      : item.epsActual < item.epsEstimate
+                        ? "Miss"
+                        : "Met Expectations"}
+                  </td>
+                  <td>{item.revenueActual}</td>
+                  <td>{item.revenueEstimate}</td>
+                  <td
+                    className={
+                      item.revenueActual > item.revenueEstimate
+                        ? "result-beat"
+                        : item.revenueActual < item.revenueEstimate
+                          ? "result-miss"
+                          : "result-met"
+                    }
+                  >
+                    {item.revenueActual > item.revenueEstimate
+                      ? "Beat"
+                      : item.revenueActual < item.revenueEstimate
+                        ? "Miss"
+                        : "Met Expectations"}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </section>
       </div>
     </main>

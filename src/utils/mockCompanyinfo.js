@@ -106,3 +106,4 @@ export const mockCompanyInfo = {
         lowestTargetPrice: 1650
     }
 };
+
