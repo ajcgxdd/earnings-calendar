@@ -12,26 +12,22 @@ import {
 } from "../utils/dateCalculations";
 
 export function EarningsCalendar() {
-  const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [view, setView] = useState("month");
 
   const calendarDates =
-    view === "month" ? getMonthDates(currentDate) : getWeekDates(selectedDate);
+    view === "month" ? getMonthDates(selectedDate) : getWeekDates(selectedDate);
 
   function handleNavigate(direction) {
-    if (view === "month") {
-      setCurrentDate((date) => navigateMonth(date, direction));
-    } else {
-      setSelectedDate((date) => navigateWeek(date, direction));
-    }
+    setSelectedDate((date) =>
+      view === "month"
+        ? navigateMonth(date, direction)
+        : navigateWeek(date, direction),
+    );
   }
 
   function handleToday() {
-    const today = new Date();
-
-    setCurrentDate(today);
-    setSelectedDate(today);
+    setSelectedDate(new Date());
   }
 
   function handleViewChange(nextView) {
@@ -54,7 +50,7 @@ export function EarningsCalendar() {
         </div>
       </div>
       <CalendarToolbar
-        currentDate={currentDate}
+        currentDate={selectedDate}
         view={view}
         onNavigate={handleNavigate}
         onToday={handleToday}
@@ -63,7 +59,7 @@ export function EarningsCalendar() {
 
       <CalendarGrid
         dates={calendarDates}
-        currentDate={currentDate}
+        currentDate={selectedDate}
         selectedDate={selectedDate}
         view={view}
         onDateSelect={handleDateSelect}

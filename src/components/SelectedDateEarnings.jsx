@@ -26,7 +26,7 @@ export function SelectedDateEarnings({ selectedDate, earnings }) {
     <section className="selected-date-earnings">
       <div className="selected-date-earnings__header">
         <div>
-          <p className="selected-date-earnings_label">SELECTED DATE</p>
+          <p className="selected-date-earnings__label">SELECTED DATE</p>
 
           <h2>{format(selectedDate, "EEEE, MMMM d, yyyy")}</h2>
         </div>
@@ -69,28 +69,28 @@ export function SelectedDateEarnings({ selectedDate, earnings }) {
         <div className="selected-date-earnings__list">
           {filteredEarnings.map((earning) => {
             const result = getEarningsResult(earning);
-            return(
-            <div
-              key={earning.id}
-              className="selected-date-earnings__item"
-            >
-              <div className="selected-date-earnings__company">
-                <Link to={`/company/${earning.symbol}`}>
-                  <h3>{earning.symbol}</h3>
-                  <p>{earning.companyName}</p>
-                </Link>
+
+            return (
+              <div key={earning.id} className="selected-date-earnings__item">
+                <div className="selected-date-earnings__company">
+                  <Link to={`/company/${earning.symbol}`}>
+                    <h3>{earning.symbol}</h3>
+                    <p>{earning.companyName}</p>
+                  </Link>
+                </div>
+
+                <div className="selected-date-earnings__details">
+                  <span>{earning.time}</span>
+
+                  <span>EPS Estimate: {earning.epsEstimate ?? "N/A"}</span>
+                </div>
+
+                <span
+                  className={`earnings-result earnings-result--${result.toLowerCase()}`}
+                >
+                  {result}
+                </span>
               </div>
-
-              <div className="selected-date-earnings__details">
-                <span>{earning.time}</span>
-
-                <span>EPS Estimate: {earning.epsEstimate ?? "N/A"}</span>
-              </div>
-
-              <span className={`earnings-result earnings-result--${result.toLowerCase()}`}>
-                {result}
-              </span>
-            </div>
             );
           })}
         </div>

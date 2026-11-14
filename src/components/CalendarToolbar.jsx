@@ -1,8 +1,29 @@
-import { format } from "date-fns";
-import "./CalendarToolbar.css"
+import { addDays, format } from "date-fns";
+import { getStartOfWeek } from "../utils/dateCalculations";
+import "./CalendarToolbar.css";
 
-export function CalendarToolbar({ currentDate, view, onNavigate, onToday, onViewChange }){
-  const title = view === "month" ? format(currentDate, "MMMM yyyy") : "Selected week";
+function getTitle(currentDate, view) {
+  if (view === "month") {
+    return format(currentDate, "MMMM yyyy");
+  }
+
+  const weekStart = getStartOfWeek(currentDate);
+  const weekEnd = addDays(weekStart, 6);
+
+  const startFormat =
+    weekStart.getFullYear() === weekEnd.getFullYear() ? "MMM d" : "MMM d, yyyy";
+
+  return `${format(weekStart, startFormat)} – ${format(weekEnd, "MMM d, yyyy")}`;
+}
+
+export function CalendarToolbar({
+  currentDate,
+  view,
+  onNavigate,
+  onToday,
+  onViewChange,
+}) {
+  const title = getTitle(currentDate, view);
 
   return (
     <div className="calendar-toolbar">
@@ -31,6 +52,7 @@ export function CalendarToolbar({ currentDate, view, onNavigate, onToday, onView
           <button
             className="calendar-toolbar__nav-button"
             onClick={() => onNavigate(1)}
+            aria-label="Next"
           >
             &gt;
           </button>
@@ -43,6 +65,7 @@ export function CalendarToolbar({ currentDate, view, onNavigate, onToday, onView
                 ? "calendar-toolbar__view-button active"
                 : "calendar-toolbar__view-button"
             }
+            aria-pressed={view === "month"}
             onClick={() => onViewChange("month")}
           >
             Month
@@ -54,14 +77,13 @@ export function CalendarToolbar({ currentDate, view, onNavigate, onToday, onView
                 ? "calendar-toolbar__view-button active"
                 : "calendar-toolbar__view-button"
             }
+            aria-pressed={view === "week"}
             onClick={() => onViewChange("week")}
           >
             Week
           </button>
-
         </div>
       </div>
     </div>
   );
 }
-    

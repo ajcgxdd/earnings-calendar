@@ -1,40 +1,68 @@
-import { Link } from "react-router-dom";
-import { mockCompanyInfo } from "../utils/mockCompanyinfo";
-import "./companyInfo.css";
+import { Link, useParams } from "react-router-dom";
+import { format, parseISO } from "date-fns";
+import { getCompanyBySymbol } from "../utils/mockCompanyinfo";
 import { formattedDate } from "../utils/dateCalculations";
-import { format } from "date-fns";
+import { PageMessage } from "./PageMessage";
+import "./companyInfo.css";
+
+function convertIntoCr(marketCap) {
+  return (marketCap / 1e7).toLocaleString("en-IN") + " Cr.";
+}
+
+function getDomain(url) {
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return url;
+  }
+}
+
+function getComparison(actual, estimate) {
+  if (actual > estimate) return { label: "Beat", className: "result-beat" };
+  if (actual < estimate) return { label: "Miss", className: "result-miss" };
+  return { label: "Met Expectations", className: "result-met" };
+}
 
 export function CompanyInfo() {
-  function convertIntoCr(marketCap) {
-    return (marketCap / 1e7).toLocaleString("en-IN") + " Cr.";
+  const { symbol } = useParams();
+  const company = getCompanyBySymbol(symbol);
+
+  if (!company) {
+    return (
+      <PageMessage icon="?" title="Company not found">
+        We don't have data for "{symbol}" yet.
+      </PageMessage>
+    );
   }
+
+  const { profile, stock, upcomingEarnings, earningsHistory } = company;
 
   const stockMetrics = [
     {
       label: "Current Price",
-      value: `₹${mockCompanyInfo.stock.currentPrice.toLocaleString("en-IN")}`,
+      value: `₹${stock.currentPrice.toLocaleString("en-IN")}`,
     },
     {
       label: "Market Capitalization",
-      value: convertIntoCr(mockCompanyInfo.stock.marketCap),
+      value: convertIntoCr(stock.marketCap),
     },
     {
       label: "Price-to-Earnings Ratio",
-      value: `${mockCompanyInfo.stock.peRatio}x`,
+      value: `${stock.peRatio}x`,
     },
     {
       label: "Trading Volume",
-      value: mockCompanyInfo.stock.volume.toLocaleString("en-IN"),
+      value: stock.volume.toLocaleString("en-IN"),
     },
   ];
 
   const profileDetails = [
-    { label: "Founded", value: mockCompanyInfo.profile.founded },
-    { label: "Headquarters", value: mockCompanyInfo.profile.headquarters },
-    { label: "CEO", value: mockCompanyInfo.profile.ceo },
+    { label: "Founded", value: profile.founded },
+    { label: "Headquarters", value: profile.headquarters },
+    { label: "CEO", value: profile.ceo },
     {
       label: "Employees",
-      value: mockCompanyInfo.profile.employees.toLocaleString("en-IN"),
+      value: profile.employees.toLocaleString("en-IN"),
     },
   ];
 
@@ -51,23 +79,18 @@ export function CompanyInfo() {
 
             <div className="company-identity">
               <div>
-                <h1>{mockCompanyInfo.companyName}</h1>
+                <h1>{company.companyName}</h1>
 
                 <p className="company-meta">
-                  {mockCompanyInfo.exchange} / {mockCompanyInfo.symbol} /{" "}
-                  {mockCompanyInfo.industry}
+                  {company.exchange} / {company.symbol} / {company.industry}
                 </p>
 
-                <a
-                  href={mockCompanyInfo.profile.website}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {mockCompanyInfo.symbol.toLowerCase()}.com
+                <a href={profile.website} target="_blank" rel="noreferrer">
+                  {getDomain(profile.website)}
                 </a>
               </div>
 
-              <span className="company-symbol">{mockCompanyInfo.symbol}</span>
+              <span className="company-symbol">{company.symbol}</span>
             </div>
           </section>
 
@@ -93,16 +116,14 @@ export function CompanyInfo() {
             ))}
           </div>
 
-          <p className="company-description">
-            {mockCompanyInfo.profile.description}
-          </p>
+          <p className="company-description">{profile.description}</p>
         </aside>
 
         <section className="company-latest-earnings">
           <div className="latest-earnings-header">
             <div>
               <p className="company-section-label">UPCOMING EARNINGS</p>
-              <h2>{mockCompanyInfo.upcomingEarnings.quarter}</h2>
+              <h2>{upcomingEarnings.quarter}</h2>
             </div>
 
             <span className="earnings-status">Upcoming</span>
@@ -111,30 +132,24 @@ export function CompanyInfo() {
           <div className="latest-earnings-details">
             <div className="earnings-date">
               <span>Reporting Date</span>
-              <strong>
-                {formattedDate(mockCompanyInfo.upcomingEarnings.reportingDate)}
-              </strong>
-              <small>{mockCompanyInfo.upcomingEarnings.reportingTime}</small>
+              <strong>{formattedDate(upcomingEarnings.reportingDate)}</strong>
+              <small>{upcomingEarnings.reportingTime}</small>
             </div>
 
             <div className="earnings-metric">
               <span>EPS Estimate</span>
-              <strong>₹{mockCompanyInfo.upcomingEarnings.epsEstimate}</strong>
+              <strong>₹{upcomingEarnings.epsEstimate}</strong>
             </div>
 
             <div className="earnings-metric">
               <span>Revenue Estimate</span>
               <strong>
-                ₹
-                {mockCompanyInfo.upcomingEarnings.revenueEstimate.toLocaleString(
-                  "en-IN",
-                )}{" "}
-                Cr.
+                ₹{upcomingEarnings.revenueEstimate.toLocaleString("en-IN")} Cr.
               </strong>
             </div>
-
           </div>
         </section>
+
         <section className="historical-earnings">
           <strong>Historical Financial Performance</strong>
           <table>
@@ -151,46 +166,26 @@ export function CompanyInfo() {
               </tr>
             </thead>
             <tbody>
-              {mockCompanyInfo.earningsHistory.map((item) => (
-                <tr key={item.quarter}>
-                  <td>{item.quarter}</td>
-                  <td>{format(new Date(item.date), "dd-MM-yyyy")}</td>
-                  <td>{item.epsActual}</td>
-                  <td>{item.epsEstimate}</td>
-                  <td
-                    className={
-                      item.epsActual > item.epsEstimate
-                        ? "result-beat"
-                        : item.epsActual < item.epsEstimate
-                          ? "result-miss"
-                          : "result-met"
-                    }
-                  >
-                    {item.epsActual > item.epsEstimate
-                      ? "Beat"
-                      : item.epsActual < item.epsEstimate
-                        ? "Miss"
-                        : "Met Expectations"}
-                  </td>
-                  <td>{item.revenueActual}</td>
-                  <td>{item.revenueEstimate}</td>
-                  <td
-                    className={
-                      item.revenueActual > item.revenueEstimate
-                        ? "result-beat"
-                        : item.revenueActual < item.revenueEstimate
-                          ? "result-miss"
-                          : "result-met"
-                    }
-                  >
-                    {item.revenueActual > item.revenueEstimate
-                      ? "Beat"
-                      : item.revenueActual < item.revenueEstimate
-                        ? "Miss"
-                        : "Met Expectations"}
-                  </td>
-                </tr>
-              ))}
+              {earningsHistory.map((item) => {
+                const eps = getComparison(item.epsActual, item.epsEstimate);
+                const revenue = getComparison(
+                  item.revenueActual,
+                  item.revenueEstimate,
+                );
+
+                return (
+                  <tr key={item.quarter}>
+                    <td>{item.quarter}</td>
+                    <td>{format(parseISO(item.date), "dd-MM-yyyy")}</td>
+                    <td>{item.epsActual}</td>
+                    <td>{item.epsEstimate}</td>
+                    <td className={eps.className}>{eps.label}</td>
+                    <td>{item.revenueActual}</td>
+                    <td>{item.revenueEstimate}</td>
+                    <td className={revenue.className}>{revenue.label}</td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </section>

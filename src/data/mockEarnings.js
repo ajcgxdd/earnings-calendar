@@ -1,56 +1,28 @@
-export const mockEarnings = [
-  {
-    id: 1,
-    symbol: "RELIANCE",
-    companyName: "Reliance Industries",
-    date: "2026-10-27",
-    time: "After Market",
-    epsEstimate: 18.5,
+import { mockCompanies } from "../utils/mockCompanyinfo";
+
+
+export const mockEarnings = Object.values(mockCompanies).flatMap((company) => {
+  const { symbol, companyName, upcomingEarnings, earningsHistory } = company;
+
+  const upcoming = {
+    id: `${symbol}-${upcomingEarnings.quarter}`,
+    symbol,
+    companyName,
+    date: upcomingEarnings.reportingDate,
+    time: upcomingEarnings.reportingTime,
+    epsEstimate: upcomingEarnings.epsEstimate,
     epsActual: null,
-  },
-  {
-    id: 2,
-    symbol: "INFY",
-    companyName: "Infosys",
-    date: "2026-10-27",
-    time: "Before Market",
-    epsEstimate: 16.2,
-    epsActual: 17.1,
-  },
-  {
-    id: 3,
-    symbol: "TCS",
-    companyName: "Tata Consultancy Services",
-    date: "2026-10-28",
-    time: "After Market",
-    epsEstimate: 25.4,
-    epsActual: null,
-  },
-  {
-    id: 4,
-    symbol: "HDFCBANK",
-    companyName: "HDFC Bank",
-    date: "2026-10-29",
-    time: "Before Market",
-    epsEstimate: 22.8,
-    epsActual: 23.5,
-  },
-  {
-    id: 5,
-    symbol: "ICICIBANK",
-    companyName: "ICICI Bank",
-    date: "2026-10-29",
-    time: "After Market",
-    epsEstimate: 19.4,
-    epsActual: null,
-  },
-  {
-    id: 6,
-    symbol: "WIPRO",
-    companyName: "Wipro",
-    date: "2026-10-30",
-    time: "After Market",
-    epsEstimate: 3.1,
-    epsActual: 2.8,
-  },
-];
+  };
+
+  const past = earningsHistory.map((item) => ({
+    id: `${symbol}-${item.quarter}`,
+    symbol,
+    companyName,
+    date: item.date,
+    time: upcomingEarnings.reportingTime,
+    epsEstimate: item.epsEstimate,
+    epsActual: item.epsActual,
+  }));
+
+  return [upcoming, ...past];
+});
